@@ -3,7 +3,7 @@
     "name": "Markdown",
     "version": "0.2.0",
     "description": "Convert between Markdown and HTML",
-    "author": "schrodinger-community",
+    "author": "georgemandis",
     "type": "script",
     "platforms": ["macos", "linux", "windows"],
     "entry": "index.js",
