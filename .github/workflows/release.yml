@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract plugin metadata
+        id: meta
+        run: |
+          ID=$(jq -r .id plugin.json)
+          VERSION=$(jq -r .version plugin.json)
+          echo "id=$ID" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "archive=${ID}-${VERSION}.tar.gz" >> "$GITHUB_OUTPUT"
+
+      - name: Create tarball
+        run: |
+          tar czf "${{ steps.meta.outputs.archive }}" \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='README.md' \
+            plugin.json index.js
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.meta.outputs.archive }}
+          generate_release_notes: true

@@ -1,0 +1,15 @@
+{
+    "id": "markdown",
+    "name": "Markdown",
+    "version": "0.2.0",
+    "description": "Convert between Markdown and HTML",
+    "author": "schrodinger-community",
+    "type": "script",
+    "platforms": ["macos", "linux", "windows"],
+    "entry": "index.js",
+    "modes": [
+        { "id": "to-html", "label": "To HTML", "default": true },
+        { "id": "to-markdown", "label": "To Markdown" }
+    ],
+    "config": {}
+}
